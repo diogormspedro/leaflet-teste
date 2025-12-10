@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Teste Leaflet</title>
+  <title>Mapa com DEM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Leaflet CSS -->
@@ -23,16 +23,22 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-  var map = L.map('map').setView([38.65, -7.59], 13); // Estremoz como exemplo
+  // Inicializar o mapa
+  var map = L.map('map').setView([38.65, -7.59], 12);
 
+  // Mapa base (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
   }).addTo(map);
 
-  L.marker([38.65, -7.59]).addTo(map)
-    .bindPopup('Olá Diogo! O teu primeiro mapa Leaflet está a funcionar.')
-    .openPopup();
+  // ✅ ADIÇÃO: DEM em tiles
+  L.tileLayer('data/DEM/tiles/{z}/{x}/{y}.png', {
+    maxZoom: 14,
+    opacity: 0.7,   // opcional: transparência para ver o OSM por baixo
+    attribution: 'DEM'
+  }).addTo(map);
+
 </script>
 
 </body>
